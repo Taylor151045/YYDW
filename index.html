@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>和洋洋大王的玩耍计划A 🌟</title>
+    <title>与洋洋大王的玩耍计划A 🌟</title>
     <style>
         * {
             margin: 0;
@@ -12,7 +12,7 @@
             font-family: '微软雅黑', sans-serif;
         }
         body {
-            background: #f8f9fa;  /* 改为浅米色背景，更轻松不显眼 */
+            background: #e3f2fd;  /* 浅蓝色背景 */
             padding: 40px 20px;
         }
         .container {
@@ -21,29 +21,29 @@
             background: white;
             border-radius: 20px;
             padding: 30px;
-            box-shadow: 0 8px 24px rgba(180, 190, 200, 0.2);  /* 调整阴影为中性灰调 */
+            box-shadow: 0 8px 24px rgba(180, 190, 200, 0.2);
         }
         .title {
-            color: #6c757d;  /* 标题改为中性灰色，与新背景更协调 */
+            color: #2196f3;  /* 亮蓝色标题 */
             font-size: 2.2em;
             text-align: center;
             margin-bottom: 30px;
-            border-bottom: 2px solid #e9ecef;  /* 分割线改为浅灰色 */
+            border-bottom: 2px solid #bbdefb;  /* 浅蓝分割线 */
             padding-bottom: 15px;
         }
         .section {
             margin-bottom: 20px;
-            border: 1px solid #e9ecef;  /* 板块边框改为浅灰色 */
+            border: 1px solid #bbdefb;  /* 浅蓝边框 */
             border-radius: 12px;
             padding: 15px;
             cursor: pointer;
             transition: all 0.3s;
         }
         .section:hover {
-            box-shadow: 0 4px 12px rgba(180, 190, 200, 0.15);  /* 悬停阴影同步调整 */
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.15);  /* 蓝调悬停阴影 */
         }
         .section h3 {
-            color: #495057;  /* 子标题改为深灰色，保持清晰 */
+            color: #1976d2;  /* 深蓝子标题 */
             font-size: 1.3em;
             margin-bottom: 10px;
             position: relative;
@@ -51,24 +51,24 @@
         }
         .section h3::before {
             content: "▶";
-            color: #6c757d;  /* 箭头改为中性灰色 */
+            color: #2196f3;  /* 亮蓝色箭头 */
             position: absolute;
             left: 0;
             font-size: 0.9em;
             transition: transform 0.3s;
         }
         .section p, .section ul {
-            color: #333;
+            color: #333;  /* 深灰正文 */
             line-height: 1.6;
             font-size: 1.1em;
-            display: none; /* 默认隐藏细节 */
+            display: none;
             padding-left: 25px;
         }
         .section.active h3::before {
             transform: rotate(90deg);
         }
         .section.active p, .section.active ul {
-            display: block; /* 展开时显示 */
+            display: block;
             animation: fadeIn 0.3s ease-in;
         }
         @keyframes fadeIn {
@@ -125,7 +125,6 @@
     </div>
 
     <script>
-        // 点击展开/收起效果（未修改）
         document.querySelectorAll('.section').forEach(section => {
             section.addEventListener('click', () => {
                 section.classList.toggle('active');
