@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>给小洋宝宝解闷</title>
+    <title>给小洋宝宝解闷~</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -16,7 +16,7 @@
         body {
             background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
             min-height: 100vh;
-            padding: 20px 10px;
+            padding: 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -24,91 +24,87 @@
         }
 
         .game-container {
-            max-width: 500px;
             width: 100%;
-            padding: 20px;
+            max-width: 350px; /* 缩小最大宽度适配手机 */
+            padding: 15px 10px;
             background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
             position: relative;
-            overflow: hidden;
         }
 
         .game-header {
             text-align: center;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
+            margin-bottom: 15px;
         }
 
         .game-title {
             color: #e66465;
-            font-size: 32px;
-            margin-bottom: 15px;
+            font-size: 24px;
+            margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(230, 100, 101, 0.15);
         }
 
         .game-info {
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 20px;
             background-color: #fff0f3;
-            padding: 12px 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            padding: 8px 15px;
+            border-radius: 12px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
         }
 
         .info-item {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 17px;
+            gap: 5px;
+            font-size: 14px;
         }
 
         .info-item i {
             color: #e66465;
+            font-size: 16px;
         }
 
         .info-item span {
             color: #e66465;
             font-weight: bold;
-            font-size: 19px;
-            min-width: 40px;
+            font-size: 16px;
+            min-width: 30px;
         }
 
         .game-wrapper {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 25px;
-            margin-bottom: 25px;
-            position: relative;
-            z-index: 1;
+            gap: 15px;
+            margin-bottom: 15px;
         }
 
         #gameCanvas {
-            border: 4px solid #ffccd5;
-            border-radius: 12px;
+            border: 3px solid #ffccd5;
+            border-radius: 10px;
             background-color: #fff;
-            box-shadow: 0 8px 16px rgba(230, 100, 101, 0.1);
+            box-shadow: 0 5px 10px rgba(230, 100, 101, 0.1);
             width: 100%;
-            max-width: 280px;
+            max-width: 200px; /* 缩小游戏区域宽度 */
             height: auto;
         }
 
         .next-piece-container {
             background-color: #fff0f3;
-            padding: 15px;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
         }
 
         #nextPieceCanvas {
             border: 2px solid #ffccd5;
-            border-radius: 8px;
+            border-radius: 6px;
             background-color: #fff;
-            width: 110px;
-            height: 110px;
+            width: 80px; /* 缩小下一个方块预览 */
+            height: 80px;
             display: block;
             margin: 0 auto;
         }
@@ -116,32 +112,30 @@
         .next-piece-title {
             color: #e66465;
             text-align: center;
-            margin-bottom: 10px;
-            font-size: 18px;
+            margin-bottom: 8px;
+            font-size: 15px;
             font-weight: bold;
         }
 
         .control-panel {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+            gap: 10px;
             width: 100%;
-            max-width: 380px;
+            max-width: 300px;
             margin: 0 auto;
-            position: relative;
-            z-index: 1;
         }
 
         .control-btn {
             background: linear-gradient(145deg, #e66465, #d15353);
             color: white;
             border: none;
-            border-radius: 12px;
-            padding: 16px 0;
-            font-size: 18px;
+            border-radius: 10px;
+            padding: 12px 0;
+            font-size: 14px;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 4px 8px rgba(230, 100, 101, 0.2);
+            box-shadow: 0 3px 6px rgba(230, 100, 101, 0.2);
             transition: all 0.2s ease;
             display: flex;
             align-items: center;
@@ -150,16 +144,16 @@
         }
 
         .control-btn i {
-            font-size: 20px;
+            font-size: 16px;
         }
 
         .control-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(230, 100, 101, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(230, 100, 101, 0.3);
         }
 
         .control-btn:active {
-            transform: translateY(-1px);
+            transform: translateY(0);
         }
 
         .control-btn.pause-btn {
@@ -183,28 +177,28 @@
             align-items: center;
             justify-content: center;
             z-index: 100;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(3px);
         }
 
         .modal-content {
             background-color: white;
-            padding: 35px 25px;
-            border-radius: 20px;
+            padding: 25px 15px;
+            border-radius: 15px;
             text-align: center;
             width: 90%;
-            max-width: 380px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-width: 300px; /* 缩小模态框 */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
 
         .modal-title {
             color: #e66465;
-            font-size: 28px;
-            margin-bottom: 20px;
+            font-size: 22px;
+            margin-bottom: 15px;
         }
 
         .modal p {
-            font-size: 18px;
-            margin-bottom: 25px;
+            font-size: 15px;
+            margin-bottom: 20px;
             color: #5a3d5c;
             line-height: 1.5;
         }
@@ -213,9 +207,9 @@
             background: linear-gradient(145deg, #e66465, #d15353);
             color: white;
             border: none;
-            border-radius: 12px;
-            padding: 14px 35px;
-            font-size: 20px;
+            border-radius: 10px;
+            padding: 12px 25px;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -223,21 +217,31 @@
 
         .start-btn:hover {
             background: linear-gradient(145deg, #d15353, #b94545);
-            transform: translateY(-3px);
+            transform: translateY(-2px);
         }
 
-        @media (max-width: 480px) {
+        /* 移动设备专用优化 */
+        @media (max-width: 360px) {
             .game-container {
-                padding: 15px;
+                padding: 10px 5px;
             }
-
+            
             .game-title {
-                font-size: 28px;
+                font-size: 22px;
             }
-
+            
+            .game-wrapper {
+                gap: 10px;
+            }
+            
             .control-btn {
-                padding: 14px 0;
-                font-size: 16px;
+                padding: 10px 0;
+                font-size: 13px;
+            }
+            
+            #nextPieceCanvas {
+                width: 70px;
+                height: 70px;
             }
         }
     </style>
@@ -245,7 +249,7 @@
 <body>
     <div class="game-container">
         <div class="game-header">
-            <h1 class="game-title">💖 给小洋宝宝解闷 💖</h1>
+            <h1 class="game-title">💖 给小洋宝宝解闷~ 💖</h1>
             <div class="game-info">
                 <div class="info-item">
                     <i class="fas fa-star"></i> 分数: <span id="score">0</span>
@@ -257,10 +261,10 @@
         </div>
 
         <div class="game-wrapper">
-            <canvas id="gameCanvas" width="280" height="500"></canvas>
+            <canvas id="gameCanvas" width="200" height="360"></canvas> <!-- 缩小画布尺寸 -->
             <div class="next-piece-container">
                 <h3 class="next-piece-title">下一个</h3>
-                <canvas id="nextPieceCanvas" width="110" height="110"></canvas>
+                <canvas id="nextPieceCanvas" width="80" height="80"></canvas>
             </div>
         </div>
 
@@ -280,7 +284,7 @@
                 右移 <i class="fas fa-arrow-right"></i>
             </button>
             <button class="control-btn pause-btn" id="pauseBtn">
-                <i class="fas fa-pause"></i> 暂停游戏
+                <i class="fas fa-pause"></i> 暂停
             </button>
             <button class="control-btn restart-btn" id="restartBtn">
                 <i class="fas fa-redo"></i> 重新开始
@@ -305,11 +309,11 @@
     </div>
 
     <script>
-        // 游戏常量定义
-        const ROWS = 20;          // 游戏行数
-        const COLS = 10;          // 游戏列数
-        const BLOCK_SIZE = 28;    // 方块大小(像素)
-        const INITIAL_SPEED = 1000; // 初始下落速度(毫秒)
+        // 游戏常量定义（适配手机尺寸）
+        const ROWS = 20;          // 保持行数
+        const COLS = 10;          // 保持列数
+        const BLOCK_SIZE = 18;    // 缩小方块尺寸适配手机
+        const INITIAL_SPEED = 1000;
 
         // 方块颜色方案
         const COLORS = [
@@ -411,17 +415,11 @@
             
             // 计算初始位置（确保方块完全可见）
             const pieceWidth = game.current.shape[0].length;
-            const pieceHeight = game.current.shape.length;
             
             // 水平居中
             game.current.x = Math.floor(COLS / 2) - Math.floor(pieceWidth / 2);
-            // 垂直位置：确保整个方块可见
+            // 垂直位置：顶部
             game.current.y = 0;
-            
-            // 特殊处理第一个方块，确保它完全在游戏区域内
-            if (game.lines === 0 && game.score === 0) {
-                game.current.y = 0;
-            }
             
             // 生成新的下一个方块
             generateNextPiece();
@@ -495,7 +493,7 @@
             nextCtx.clearRect(0, 0, nextCanvas.width, nextCanvas.height);
             
             const { shape, color } = game.next;
-            const blockSize = 22;
+            const blockSize = 16; // 缩小预览方块
             const offsetX = (nextCanvas.width - shape[0].length * blockSize) / 2;
             const offsetY = (nextCanvas.height - shape.length * blockSize) / 2;
             
@@ -515,26 +513,26 @@
             // 方块主体
             ctx.fillStyle = color;
             ctx.beginPath();
-            ctx.roundRect(x + 2, y + 2, size - 4, size - 4, 5);
+            ctx.roundRect(x + 1, y + 1, size - 2, size - 2, 3);
             ctx.fill();
             
             // 阴影效果
             ctx.shadowColor = rgbaFromHex(color, 0.3);
-            ctx.shadowBlur = 8;
-            ctx.shadowOffsetX = 3;
-            ctx.shadowOffsetY = 3;
+            ctx.shadowBlur = 4;
+            ctx.shadowOffsetX = 2;
+            ctx.shadowOffsetY = 2;
             ctx.fill();
             ctx.shadowColor = 'transparent';
             
             // 高光效果
             ctx.fillStyle = rgbaFromHex(color, 0.6);
             ctx.beginPath();
-            ctx.roundRect(x + 3, y + 3, (size - 6) / 2, (size - 6) / 2, 3);
+            ctx.roundRect(x + 2, y + 2, (size - 4) / 2, (size - 4) / 2, 2);
             ctx.fill();
             
             // 边框
             ctx.strokeStyle = rgbaFromHex(color, 0.7);
-            ctx.lineWidth = 1.5;
+            ctx.lineWidth = 1;
             ctx.stroke();
         }
 
@@ -546,7 +544,7 @@
             return `rgba(${r}, ${g}, ${b}, ${alpha})`;
         }
 
-        // 检查碰撞 - 核心修复点
+        // 检查碰撞
         function checkCollision(shape, x, y) {
             for (let row = 0; row < shape.length; row++) {
                 for (let col = 0; col < shape[row].length; col++) {
@@ -554,13 +552,9 @@
                         const newX = x + col;
                         const newY = y + row;
                         
-                        // 检查是否超出左边界
-                        if (newX < 0) return true;
-                        // 检查是否超出右边界
-                        if (newX >= COLS) return true;
-                        // 检查是否超出下边界
-                        if (newY >= ROWS) return true;
-                        // 检查是否与已有方块重叠（只检查游戏区域内）
+                        // 检查边界
+                        if (newX < 0 || newX >= COLS || newY >= ROWS) return true;
+                        // 检查是否与已有方块重叠
                         if (newY >= 0 && game.board[newY][newX]) return true;
                     }
                 }
@@ -590,24 +584,16 @@
             return false;
         }
 
-        // 锁定当前方块 - 核心修复点
+        // 锁定当前方块
         function lockCurrentPiece() {
             const { shape, color, x, y } = game.current;
-            const pieceHeight = shape.length;
-            
-            // 计算调整后的Y位置，确保方块底部不超出游戏区域
-            let adjustedY = y;
-            const bottomRow = y + pieceHeight - 1;
-            if (bottomRow >= ROWS) {
-                adjustedY = ROWS - pieceHeight;
-            }
             
             // 将方块锁定到游戏板上
             for (let row = 0; row < shape.length; row++) {
                 for (let col = 0; col < shape[row].length; col++) {
                     if (shape[row][col]) {
                         const boardX = x + col;
-                        const boardY = adjustedY + row;
+                        const boardY = y + row;
                         
                         // 只锁定在游戏区域内的方块部分
                         if (boardX >= 0 && boardX < COLS && boardY >= 0 && boardY < ROWS) {
@@ -623,7 +609,7 @@
             // 生成新的当前方块
             spawnCurrentPiece();
             
-            // 检查游戏是否结束（新方块无法放置）
+            // 检查游戏是否结束
             if (checkCollision(game.current.shape, game.current.x, game.current.y)) {
                 gameOver();
             }
@@ -633,7 +619,7 @@
             drawNextPiece();
         }
 
-        // 计算最大下落距离 - 核心修复点
+        // 计算最大下落距离
         function calculateMaxDropDistance() {
             let distance = 0;
             
@@ -643,7 +629,6 @@
                 if (checkCollision(game.current.shape, game.current.x, newY)) {
                     break;
                 }
-                // 安全检查，防止无限循环
                 if (distance > ROWS) {
                     break;
                 }
@@ -653,20 +638,20 @@
             return distance;
         }
 
-        // 速降功能 - 核心修复点
+        // 速降功能
         function hardDrop() {
             if (game.isPaused || game.isOver) return;
             
             // 获取最大可下落距离
             const dropDistance = calculateMaxDropDistance();
             
-            // 只有确实可以下落时才移动
+            // 移动到最底部
             if (dropDistance > 0) {
                 game.current.y += dropDistance;
                 drawGame();
             }
             
-            // 锁定方块（无论是否移动）
+            // 锁定方块
             lockCurrentPiece();
         }
 
@@ -677,7 +662,7 @@
             // 保存当前形状
             const originalShape = JSON.parse(JSON.stringify(game.current.shape));
             
-            // 旋转逻辑：转置矩阵并反转每行
+            // 旋转逻辑
             const rows = originalShape.length;
             const cols = originalShape[0].length;
             const rotated = Array(cols).fill().map(() => Array(rows).fill(0));
@@ -732,7 +717,7 @@
                     // 在顶部添加一个空行
                     game.board[0] = Array(COLS).fill(0);
                     
-                    // 重新检查当前行（因为上方行下移了）
+                    // 重新检查当前行
                     y++;
                 }
             }
@@ -742,7 +727,7 @@
                 updateScore(linesCleared);
                 
                 // 随消除行数增加游戏速度
-                const speedIncrease = 0.1; // 每次消除行增加10%速度
+                const speedIncrease = 0.1;
                 game.dropInterval = Math.max(100, INITIAL_SPEED * Math.pow(1 - speedIncrease, game.lines / 10));
                 restartDropTimer();
             }
@@ -750,7 +735,6 @@
 
         // 更新分数
         function updateScore(lines) {
-            // 计分规则：消除行数越多，分数越高
             const lineScores = [0, 100, 300, 500, 800];
             game.score += lineScores[lines];
             game.lines += lines;
@@ -768,7 +752,6 @@
             if (game.dropTimer) clearInterval(game.dropTimer);
             game.dropTimer = setInterval(() => {
                 if (!game.isPaused && !game.isOver) {
-                    // 自动下落，如果无法下落则锁定方块
                     movePiece(0, 1);
                 }
             }, game.dropInterval);
@@ -786,8 +769,8 @@
             
             game.isPaused = !game.isPaused;
             pauseBtn.innerHTML = game.isPaused 
-                ? '<i class="fas fa-play"></i> 继续游戏' 
-                : '<i class="fas fa-pause"></i> 暂停游戏';
+                ? '<i class="fas fa-play"></i> 继续' 
+                : '<i class="fas fa-pause"></i> 暂停';
                 
             if (game.isPaused) {
                 clearInterval(game.dropTimer);
@@ -795,7 +778,7 @@
                 gameCtx.fillStyle = 'rgba(255, 255, 255, 0.7)';
                 gameCtx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
                 gameCtx.fillStyle = '#e66465';
-                gameCtx.font = 'bold 24px Arial';
+                gameCtx.font = 'bold 18px Arial';
                 gameCtx.textAlign = 'center';
                 gameCtx.fillText('已暂停', gameCanvas.width / 2, gameCanvas.height / 2);
             } else {
@@ -870,20 +853,48 @@
             }
         });
 
+        // 触摸控制支持（手机滑动）
+        let touchStartX = 0;
+        let touchStartY = 0;
+        
+        gameCanvas.addEventListener('touchstart', (e) => {
+            if (game.isPaused || game.isOver) return;
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+            e.preventDefault();
+        }, { passive: false });
+        
+        gameCanvas.addEventListener('touchend', (e) => {
+            if (game.isPaused || game.isOver) return;
+            
+            const touchEndX = e.changedTouches[0].clientX;
+            const touchEndY = e.changedTouches[0].clientY;
+            const diffX = touchEndX - touchStartX;
+            const diffY = touchEndY - touchStartY;
+            
+            // 判断滑动方向
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                // 水平滑动
+                if (diffX > 30) {
+                    movePiece(1, 0); // 右移
+                } else if (diffX < -30) {
+                    movePiece(-1, 0); // 左移
+                }
+            } else {
+                // 垂直滑动
+                if (diffY > 30) {
+                    hardDrop(); // 速降
+                } else if (diffY < -30) {
+                    rotatePiece(); // 上滑旋转
+                }
+            }
+            
+            e.preventDefault();
+        }, { passive: false });
+
         // 页面加载时初始化
         window.addEventListener('load', () => {
             startModal.style.display = 'flex';
-            
-            // 响应式调整
-            const resizeCanvas = () => {
-                const containerWidth = document.querySelector('.game-container').clientWidth;
-                const maxWidth = Math.min(containerWidth - 40, 280);
-                gameCanvas.style.width = `${maxWidth}px`;
-                gameCanvas.style.height = `${(maxWidth / COLS) * ROWS}px`;
-            };
-            
-            resizeCanvas();
-            window.addEventListener('resize', resizeCanvas);
         });
     </script>
 </body>
