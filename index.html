@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>俄罗斯方块 - 梦幻版</title>
+    <title>给小洋宝宝解闷</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <style>
         body {
@@ -13,9 +13,10 @@
             font-family: 'Segoe UI', Arial, sans-serif;
             touch-action: manipulation;
             margin: 0;
-            padding: 20px;
+            padding: 10px;
             position: relative;
             overflow: hidden;
+            height: 100vh;
         }
 
         .stars {
@@ -34,20 +35,23 @@
         }
 
         #game-container {
-            display: flex;
-            gap: 20px;
-            margin: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
+            width: 100%;
+            max-width: 400px;
+            height: 90vh;
+            display: grid;
+            grid-template-rows: 1fr auto;
+            gap: 10px;
+            padding: 10px;
         }
 
         #game {
+            width: 100%;
+            height: 100%;
             border: 3px solid #34495e;
             border-radius: 15px;
             box-shadow: 0 0 30px rgba(46, 204, 113, 0.2);
             background: rgba(0,0,0,0.7);
             position: relative;
-            overflow: hidden;
         }
 
         #game::after {
@@ -65,23 +69,24 @@
 
         #controls {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin: 20px;
-            max-width: 300px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            padding: 10px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(8px);
+            border-radius: 15px;
         }
 
         .control-btn {
             background: linear-gradient(145deg, #3498db, #2980b9);
             border: none;
-            border-radius: 50%;
+            border-radius: 12px;
             color: white;
-            width: 60px;
-            height: 60px;
-            font-size: 1.5em;
+            height: 50px;
+            font-size: 1.2em;
             cursor: pointer;
             transition: all 0.2s;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            opacity: 0.9;
         }
 
         .control-btn[data-action="rotate"] {
@@ -89,7 +94,7 @@
         }
 
         #score {
-            font-size: 2.5em;
+            font-size: 2em;
             background: linear-gradient(45deg, #2ecc71, #27ae60);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -97,12 +102,16 @@
         }
 
         .game-info {
-            background: rgba(0,0,0,0.5);
-            padding: 25px;
-            border-radius: 20px;
-            border: 2px solid #34495e;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 15px;
+        }
+
+        #next-block {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         @keyframes twinkle {
@@ -110,43 +119,38 @@
             50% { opacity: 1; }
         }
 
-        @keyframes blockFall {
-            0% { transform: translateY(-10px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
-
         @media (max-width: 600px) {
-            #game-container {
-                flex-direction: column;
-                align-items: center;
+            #controls {
+                grid-template-columns: repeat(4, 1fr);
+                grid-template-areas: 
+                    "left right rotate down"
+                    "start start reset reset";
             }
-            #next-block {
-                order: -1;
-            }
+            #startBtn { grid-area: start; }
+            #resetBtn { grid-area: reset; }
             .control-btn {
-                width: 50px;
-                height: 50px;
-                font-size: 1.2em;
+                height: 45px;
+                font-size: 1.1em;
             }
         }
     </style>
 </head>
 <body>
     <div class="stars" id="stars"></div>
-    <h1 style="font-size: 2.5em; text-shadow: 0 0 15px #2ecc71;">🌟 给宝宝解闷 🌟</h1>
+    <h1 style="font-size: 2em; text-shadow: 0 0 15px #2ecc71; margin: 10px 0;">🌟 给宝宝解闷 🌟</h1>
     
     <div id="game-container">
-        <canvas id="game" width="300" height="600"></canvas>
+        <canvas id="game"></canvas>
         <div class="game-info">
             <div id="next-block">
-                <p>下一个方块：</p>
-                <canvas id="next" width="100" height="100"></canvas>
+                <p>下一个：</p>
+                <canvas id="next"></canvas>
             </div>
             <p>得分：<span id="score">0</span></p>
             <div id="controls">
                 <button class="control-btn" data-action="left">←</button>
-                <button class="control-btn" data-action="rotate">↻</button>
                 <button class="control-btn" data-action="right">→</button>
+                <button class="control-btn" data-action="rotate">↻</button>
                 <button class="control-btn" data-action="down">↓</button>
                 <button id="startBtn">开始</button>
                 <button id="resetBtn">重置</button>
@@ -195,6 +199,18 @@
         let score = 0;
         let gameLoop = null;
         let gameSpeed = 800;
+
+        function resizeCanvas() {
+            const container = document.getElementById('game-container');
+            const ratio = 600 / 300;
+            canvas.width = container.clientWidth;
+            canvas.height = canvas.width * ratio;
+            nextCanvas.width = 60;
+            nextCanvas.height = 60;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
 
         function createBlock() {
             const index = Math.floor(Math.random() * SHAPES.length);
